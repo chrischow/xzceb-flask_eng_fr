@@ -30,20 +30,26 @@ def english_to_french(english_text):
     """
     Convert English text to French.
     """
-    french_text = language_translator.translate(
-        text=english_text,
-        model_id='en-fr'
-    ).get_result()
+    try:
+        french_text = language_translator.translate(
+            text=english_text,
+            model_id='en-fr'
+        ).get_result()
+    except ValueError:
+        return None
 
     return french_text.get('translations')[0].get('translation')
 
-# Translate english to french
+# Translate french to english
 def french_to_english(french_text):
     """
     Convert French text to English.
     """
-    english_text = language_translator.translate(
-        text=french_text,
-        model_id='fr-en'
-    ).get_result()
+    try:
+        english_text = language_translator.translate(
+            text=french_text,
+            model_id='fr-en'
+        ).get_result()
+    except ValueError:
+        return None
     return english_text.get('translations')[0].get('translation')
